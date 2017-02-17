@@ -22,8 +22,6 @@
                         
                         //from http://www.dotnettricks.com/learn/javascript/convert-string-to-xml-and-xml-to-string-using-javascript
                         var xmlDoc=(new DOMParser()).parseFromString(this.responseText, "text/xml");
-                        console.dir(xmlDoc);
-                        console.dir( xmlDoc.querySelector("id"));
                         resp = {
                             id: xmlDoc.querySelector("id").innerHTML,
                             message: xmlDoc.querySelector("message").innerHTML
