@@ -2,8 +2,8 @@
 
 const requestOutline = (obj, num, type, response) => {
   let stringMessage;
-    console.log(type);
-    
+  console.log(type);
+
   if (type === 'text/xml') {
     if (obj.id !== undefined) { stringMessage = `<response><message>${obj.message}</message><id>${obj.id}</id></response>`; } else { stringMessage = `<response><message>${obj.message}</message>response>`; }
     response.writeHead(num, { 'Content-Type': 'text/xml' });
