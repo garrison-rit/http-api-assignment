@@ -6,7 +6,41 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
-
+    window.onload = () =>{
+        document.querySelector('#send').onclick = () => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", document.querySelector('#page').value, true);
+            xhttp.setRequestHeader("Content-Type", document.querySelector('#type').value);
+            
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    console.dir(this.responseText);
+                    
+                    var resp;
+                    if(this.getResponseHeader("Content-Type")==="text/xml")
+                    {
+                        
+                        //from http://www.dotnettricks.com/learn/javascript/convert-string-to-xml-and-xml-to-string-using-javascript
+                        var xmlDoc=(new DOMParser()).parseFromString(this.responseText, "text/xml");
+                        console.dir(xmlDoc);
+                        console.dir( xmlDoc.querySelector("id"));
+                        resp = {
+                            id: xmlDoc.querySelector("id").innerHTML,
+                            message: xmlDoc.querySelector("message").innerHTML
+                        };
+                        
+                    } else{
+                        resp = JSON.parse(this.responseText);
+                    }
+                    content.innerHTML = "<h1>"+resp.id+"</h1>Message: "+resp.message;
+                    //document.getElementById("demo").innerHTML =
+                    //this.responseText;
+                }
+            };
+            
+            xhttp.send();
+        }
+    }
   </script>
 </head>
 <body>
