@@ -10,7 +10,7 @@
         document.querySelector('#send').onclick = () => {
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", document.querySelector('#page').value, true);
-            xhttp.setRequestHeader("Content-Type", document.querySelector('#type').value);
+            xhttp.setRequestHeader("Accept", document.querySelector('#type').value);
             
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4) {
