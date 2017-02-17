@@ -2,6 +2,8 @@
 
 const requestOutline = (obj, num, type, response) => {
   let stringMessage;
+    console.log(type);
+    
   if (type === 'text/xml') {
     if (obj.id !== undefined) { stringMessage = `<response><message>${obj.message}</message><id>${obj.id}</id></response>`; } else { stringMessage = `<response><message>${obj.message}</message>response>`; }
     response.writeHead(num, { 'Content-Type': 'text/xml' });
@@ -25,9 +27,8 @@ const getParam = (url, param) => {
 
 const getSuccess = (request, response) => {
   let header;
-
-  if (request.headers !== undefined && request.headers.accept !== undefined) {
-    header = request.headers.accept[0];
+  if (request.headers !== undefined) {
+    header = request.headers.accept;
   }
   requestOutline({
     message: 'This is a successful response',
@@ -38,8 +39,8 @@ const getSuccess = (request, response) => {
 const badRequest = (request, response) => {
   let header;
 
-  if (request.headers !== undefined && request.headers.accept !== undefined) {
-    header = request.headers.accept[0];
+  if (request.headers !== undefined) {
+    header = request.headers.accept;
   }
   if (getParam(request.url, 'valid') === 'true') {
     requestOutline({
@@ -57,8 +58,8 @@ const badRequest = (request, response) => {
 const unauthorized = (request, response) => {
   let header;
 
-  if (request.headers !== undefined && request.headers.accept !== undefined) {
-    header = request.headers.accept[0];
+  if (request.headers !== undefined) {
+    header = request.headers.accept;
   }
   if (getParam(request.url, 'loggedIn') === 'yes') {
     requestOutline({
@@ -76,8 +77,8 @@ const unauthorized = (request, response) => {
 const forbidden = (request, response) => {
   let header;
 
-  if (request.headers !== undefined && request.headers.accept !== undefined) {
-    header = request.headers.accept[0];
+  if (request.headers !== undefined) {
+    header = request.headers.accept;
   }
 
   requestOutline({
@@ -89,8 +90,8 @@ const forbidden = (request, response) => {
 const internal = (request, response) => {
   let header;
 
-  if (request.headers !== undefined && request.headers.accept !== undefined) {
-    header = request.headers.accept[0];
+  if (request.headers !== undefined) {
+    header = request.headers.accept;
   }
   requestOutline({
     message: 'Internal server error. Something went wrong.',
@@ -101,8 +102,8 @@ const internal = (request, response) => {
 const notFound = (request, response) => {
   let header;
 
-  if (request.headers !== undefined && request.headers.accept !== undefined) {
-    header = request.headers.accept[0];
+  if (request.headers !== undefined) {
+    header = request.headers.accept;
   }
   requestOutline({
     message: 'The page you are looking for was not found.',
@@ -113,8 +114,8 @@ const notFound = (request, response) => {
 const notImplemented = (request, response) => {
   let header;
 
-  if (request.headers !== undefined && request.headers.accept !== undefined) {
-    header = request.headers.accept[0];
+  if (request.headers !== undefined) {
+    header = request.headers.accept;
   }
   requestOutline({
     message: 'A get request for this page has not been implemented yet. Check again later for updated content.',
